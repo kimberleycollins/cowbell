@@ -1,39 +1,29 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cowbell!</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: #1D1D1D;
-      font-family: sans-serif;
-      color: white;
-    }
-
     body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
       text-align: center;
-      flex-direction: column;
-      max-height: 90vh;
-      overflow: hidden;
+      max-height: 100vh;
+      font-family: sans-serif;
+      background: #1D1D1D;
     }
-
+    
     a {
       color: #fff;
       text-transform: uppercase;
       margin-top: 15px;
       text-decoration: none;
     }
-
     img {
       width: 80%;
       max-width: 300px;
-      margin: 10px 0;
+      margin-top: 20px;
     }
 
     #cowbell-button {
@@ -54,10 +44,10 @@
   </style>
 </head>
 <body>
-  <img src="heading.png" alt="Cowbell heading"><br />
+  <img src="heading.png" style="width:80%;" alt="Cowbell heading"><br />
   <img src="cowbell.png" alt="Cowbell" id="cowbell-button"><br />
-  <img src="click.png" style="width:50%;" alt="Click to play"><br /><br/>
-  <a href="cowbell.mp3" download>Download (.mp3)</a>
+  <img src="click.png" style="width:50%;" alt="Click to play"><br />
+     <a href="cowbell.mp3">Download (.mp3)</a>
 
   <script>
     const audio = new Audio('cowbell.mp3');
