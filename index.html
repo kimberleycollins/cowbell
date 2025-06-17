@@ -4,36 +4,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cowbell!</title>
   <style>
-    body { text-align: center; max-height: 100vh; font-family: sans-serif; background: #1D1D1D; }
-    img { width: 80%; max-width: 300px; margin-top: 20px; cursor: pointer; }
+    body {
+      text-align: center;
+      max-height: 100vh;
+      font-family: sans-serif;
+      background: #1D1D1D;
+    }
+
+    img {
+      width: 80%;
+      max-width: 300px;
+      margin-top: 20px;
+    }
+
+    #cowbell-button {
+      cursor: pointer;
+    }
+
+    /* Shake animation */
+    @keyframes subtle-shake {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(2deg); }
+      50% { transform: rotate(-2deg); }
+      75% { transform: rotate(1deg); }
+    }
+
+    .shaking {
+      animation: subtle-shake 0.4s ease-in-out;
+    }
   </style>
 </head>
 <body>
-  <img src="heading.png" style="width:80%;" alt="Cowbell" id="cowbell"><br />
-  <img src="cowbell.png" alt="Cowbell" id="cowbell"><br />
-  <img src="click.png" style="width:50%;" alt="Cowbell" id="cowbell">
+  <img src="heading.png" style="width:80%;" alt="Cowbell heading"><br />
+  <img src="cowbell.png" alt="Cowbell" id="cowbell-button"><br />
+  <img src="click.png" style="width:50%;" alt="Click to play">
+
+  <!-- Hidden link to trigger download -->
+  <a id="preload-link" href="cowbell.mp3" download style="display: none;"></a>
+
   <script>
     const audio = new Audio('cowbell.mp3');
-    const shakeThreshold = 15;
     let isPlaying = false;
-
-    window.addEventListener('devicemotion', (event) => {
-      const acc = event.accelerationIncludingGravity;
-      const total = Math.abs(acc.x) + Math.abs(acc.y) + Math.abs(acc.z);
-
-      if (total > shakeThreshold) {
-        playCowbell();
-      }
-    });
-
-    function playCowbell() {
-      audio.currentTime = 0;
-      audio.play();
-      if (navigator.vibrate) navigator.vibrate([100]);
-      isPlaying = true;
-    }
+    const cowbell = document.getElementById('cowbell-button');
 
     function toggleCowbell() {
+      cowbell.classList.add('shaking');
+
       if (isPlaying) {
         audio.pause();
         isPlaying = false;
@@ -43,9 +59,19 @@
         isPlaying = true;
         if (navigator.vibrate) navigator.vibrate([100]);
       }
+
+      setTimeout(() => {
+        cowbell.classList.remove('shaking');
+      }, 400); // Match the animation duration
     }
 
-    document.getElementById('cowbell').addEventListener('click', toggleCowbell);
+    // Preload/download the sound file
+    window.addEventListener('DOMContentLoaded', () => {
+      const preloadLink = document.getElementById('preload-link');
+      preloadLink.click();
+    });
+
+    cowbell.addEventListener('click', toggleCowbell);
   </script>
 </body>
 </html>
