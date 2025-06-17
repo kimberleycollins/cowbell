@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-<!-- Google tag (gtag.js) -->
+
+  <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E0T1G6KJX5"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -12,7 +11,7 @@
 
   gtag('config', 'G-E0T1G6KJX5');
 </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cowbell!</title>
   <style>
     body {
@@ -50,9 +49,6 @@
   <img src="cowbell.png" alt="Cowbell" id="cowbell-button"><br />
   <img src="click.png" style="width:50%;" alt="Click to play">
 
-  <!-- Hidden link to trigger download -->
-  <a id="preload-link" href="cowbell.mp3" download style="display: none;"></a>
-
   <script>
     const audio = new Audio('cowbell.mp3');
     let isPlaying = false;
@@ -73,16 +69,11 @@
 
       setTimeout(() => {
         cowbell.classList.remove('shaking');
-      }, 400); // Match the animation duration
+      }, 400); // match animation duration
     }
-
-    // Preload/download the sound file
-    window.addEventListener('DOMContentLoaded', () => {
-      const preloadLink = document.getElementById('preload-link');
-      preloadLink.click();
-    });
 
     cowbell.addEventListener('click', toggleCowbell);
   </script>
 </body>
 </html>
+
