@@ -1,30 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-E0T1G6KJX5"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-E0T1G6KJX5');
-</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Virtual Cowbell</title>
+  <title>Cowbell!</title>
   <style>
-    body {
-      text-align: center;
-      max-height: 100vh;
-      font-family: sans-serif;
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
       background: #1D1D1D;
+      font-family: sans-serif;
+      color: white;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      max-height: 100vh;
+      text-align: center;
     }
 
     img {
       width: 80%;
       max-width: 300px;
-      margin-top: 20px;
+      margin: 10px 0;
     }
 
     #cowbell-button {
@@ -42,38 +43,20 @@
     .shaking {
       animation: subtle-shake 0.4s ease-in-out;
     }
+
+    .download-link {
+      margin-top: 20px;
+      font-size: 0.95rem;
+      color: #FFD700;
+      text-decoration: underline;
+    }
+
+    .download-link:hover {
+      opacity: 0.8;
+    }
   </style>
 </head>
 <body>
-  <img src="heading.png" style="width:80%;" alt="Cowbell heading"><br />
+  <img src="heading.png" alt="Cowbell heading"><br />
   <img src="cowbell.png" alt="Cowbell" id="cowbell-button"><br />
-  <img src="click.png" style="width:50%;" alt="Click to play">
-
-  <script>
-    const audio = new Audio('cowbell.mp3');
-    let isPlaying = false;
-    const cowbell = document.getElementById('cowbell-button');
-
-    function toggleCowbell() {
-      cowbell.classList.add('shaking');
-
-      if (isPlaying) {
-        audio.pause();
-        isPlaying = false;
-      } else {
-        audio.currentTime = 0;
-        audio.play();
-        isPlaying = true;
-        if (navigator.vibrate) navigator.vibrate([100]);
-      }
-
-      setTimeout(() => {
-        cowbell.classList.remove('shaking');
-      }, 400); // match animation duration
-    }
-
-    cowbell.addEventListener('click', toggleCowbell);
-  </script>
-</body>
-</html>
-
+  <img src="click.png" style="w
