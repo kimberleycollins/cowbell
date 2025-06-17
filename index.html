@@ -6,25 +6,27 @@
   <style>
     body { text-align: center; font-family: sans-serif; background: #fff; }
     img { width: 80%; max-width: 300px; margin-top: 50px; cursor: pointer; }
-    h1 { margin-top: 20px; }
+    #start-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background: #000;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body>
-  <h1>Tap to ring the cowbell!</h1>
+  <h1>Shake or Tap to Ring the Cowbell!</h1>
   <img src="cowbell.png" alt="Cowbell" id="cowbell">
+  <div id="start-btn">Tap to Enable Shake</div>
   <script>
     const audio = new Audio('cowbell.mp3');
     const shakeThreshold = 15;
     let isPlaying = false;
-
-    window.addEventListener('devicemotion', (event) => {
-      const acc = event.accelerationIncludingGravity;
-      const total = Math.abs(acc.x) + Math.abs(acc.y) + Math.abs(acc.z);
-
-      if (total > shakeThreshold) {
-        playCowbell();
-      }
-    });
+    let shakeEnabled = false;
 
     function playCowbell() {
       audio.currentTime = 0;
@@ -38,13 +40,40 @@
         audio.pause();
         isPlaying = false;
       } else {
-        audio.currentTime = 0;
-        audio.play();
-        isPlaying = true;
-        if (navigator.vibrate) navigator.vibrate([100]);
+        playCowbell();
       }
     }
 
+    function enableShake() {
+      if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+        DeviceMotionEvent.requestPermission()
+          .then(permissionState => {
+            if (permissionState === 'granted') {
+              window.addEventListener('devicemotion', handleMotion);
+              shakeEnabled = true;
+              document.getElementById('start-btn').style.display = 'none';
+            } else {
+              alert("Shake permission was denied.");
+            }
+          })
+          .catch(console.error);
+      } else {
+        // Not iOS
+        window.addEventListener('devicemotion', handleMotion);
+        shakeEnabled = true;
+        document.getElementById('start-btn').style.display = 'none';
+      }
+    }
+
+    function handleMotion(event) {
+      const acc = event.accelerationIncludingGravity;
+      const total = Math.abs(acc.x) + Math.abs(acc.y) + Math.abs(acc.z);
+      if (total > shakeThreshold) {
+        playCowbell();
+      }
+    }
+
+    document.getElementById('start-btn').addEventListener('click', enableShake);
     document.getElementById('cowbell').addEventListener('click', toggleCowbell);
   </script>
 </body>
