@@ -4,20 +4,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cowbell!</title>
   <style>
-    body {
-      text-align: center;
-      max-height: 100vh;
-      font-family: sans-serif;
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
       background: #1D1D1D;
+      font-family: sans-serif;
+      color: white;
     }
-       a {
-            color: #fff;
-       }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      max-height: 100vh;
+      overflow: hidden;
+    }
+
+    a {
+      color: #fff;
+      margin-top: 15px;
+      text-decoration: underline;
+    }
 
     img {
       width: 80%;
       max-width: 300px;
-      margin-top: 20px;
+      margin: 10px 0;
     }
 
     #cowbell-button {
@@ -38,10 +53,10 @@
   </style>
 </head>
 <body>
-  <img src="heading.png" style="width:80%;" alt="Cowbell heading"><br />
+  <img src="heading.png" alt="Cowbell heading"><br />
   <img src="cowbell.png" alt="Cowbell" id="cowbell-button"><br />
   <img src="click.png" style="width:50%;" alt="Click to play"><br />
-     <a href="cowbell.mp3">Download (.mp3)</a>
+  <a href="cowbell.mp3" download>Download (.mp3)</a>
 
   <script>
     const audio = new Audio('cowbell.mp3');
