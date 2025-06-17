@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cowbell!</title>
+  <style>
+    body { text-align: center; font-family: sans-serif; background: #fff; }
+    img { width: 80%; max-width: 300px; margin-top: 50px; cursor: pointer; }
+    h1 { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Shake to Ring the Cowbell!</h1>
+  <img src="cowbell.png" alt="Cowbell" id="cowbell">
+  <script>
+    const audio = new Audio('cowbell.mp3');
+    const shakeThreshold = 15;
+
+    window.addEventListener('devicemotion', (event) => {
+      const acc = event.accelerationIncludingGravity;
+      const total = Math.abs(acc.x) + Math.abs(acc.y) + Math.abs(acc.z);
+
+      if (total > shakeThreshold) {
+        ringCowbell();
+      }
+    });
+
+    function ringCowbell() {
+      audio.currentTime = 0;
+      audio.play();
+      if (navigator.vibrate) navigator.vibrate([100]);
+    }
+
+    // Fallback: tap to ring
+    document.getElementById('cowbell').addEventListener('click', ringCowbell);
+  </script>
+</body>
+</html>
