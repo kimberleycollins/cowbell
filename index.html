@@ -32,6 +32,23 @@
 
   
   <style>
+
+    @font-face {
+      font-family: 'Gotham Condensed';
+      src: url('GothamCondensedItalic.woff2') format('woff2'),
+           url('GothamCondensedItalic.woff') format('woff');
+      font-style: italic;
+      font-weight: normal;
+    }
+
+    h1 {
+      font-family: 'Gotham Condensed', sans-serif;
+      font-style: italic;
+      text-transform: uppercase;
+      font-size: 2.5rem;
+      color: #C8102E;
+    }
+    
     body {
       text-align: center;
       max-height: 100vh;
@@ -69,9 +86,9 @@
   </style>
 </head>
 <body>
-  <img src="heading.png" style="width:80%;" alt="Cowbell heading"><br />
+<h1>Virtual Cowbell</h1>  
   <img src="cowbell.png" alt="Cowbell" id="cowbell-button"><br />
-  <img src="click.png" style="width:50%;" alt="Click to play"><br /><br />
+<h1 style="color: #F4A81D;">Click/Tap To Ring</h1>  
      <a href="cowbell.mp3">Download (.mp3)</a>
 
   <script>
